@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: compte-ms
+  datasource:
+    url: jdbc:mysql://localhost:3306/compte-microservice-db
+    username: root
+    password:
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      dialect:  org.hibernate.dialect.MySQL5Dialect
+
