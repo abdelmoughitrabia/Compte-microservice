@@ -3,6 +3,8 @@ package com.abrab.comptemicroservice.controller;
 import com.abrab.comptemicroservice.domain.Compte;
 import com.abrab.comptemicroservice.service.CompteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 
+@RefreshScope//enable update of ppties at runtime , need of actuator also , curl -d {} http://localhost:port/refresh
 @RestController
 public class CompteController {
 
@@ -19,6 +22,13 @@ public class CompteController {
     private CompteService compteService;
     @Autowired
     private Environment environment;
+    @Value("${global}")
+    private String testConf;
+
+    @GetMapping("/conf")
+    public String testConf() {
+        return testConf;
+    }
 
     @GetMapping("/comptes")
     public List<Compte> getComptes() {
